@@ -1,8 +1,0 @@
-[
-  {
-    "id": "ls",
-    "execute-command": "ls",
-    "include-command-output-in-response": "true",
-    "command-working-directory": "/data/domains"
-  }
-]

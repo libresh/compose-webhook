@@ -1,0 +1,19 @@
+{{ range $hash, $containers := groupBy $ "Env.LIBRESH_WEBHOOK_SECRET_HASH" }}
+  {{ $nb := len $containers }}
+  {{ $container:= index $containers 0 }}
+[
+  {
+    "id": "{{ $hash }}",
+    "execute-command": "/opt/bin/libre",
+    "include-command-output-in-response": true,
+    "pass-arguments-to-command": [
+      {
+        "source": "url",
+        "name": "action"
+      } 
+    ],
+    "command-working-directory": "/data/domains/{{ $container.Env.VIRTUAL_HOST }}"
+  }
+
+]
+{{end}}

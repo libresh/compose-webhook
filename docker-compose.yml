@@ -5,6 +5,8 @@ networks:
 services:
   webhook:
     image: indiehosters/webhook
+    environment:
+    - LIBRESH_WEBHOOK_HOST=true
     volumes:
     - "/var/run/dbus:/var/run/dbus"
     - "/run/systemd:/run/systemd"
@@ -13,3 +15,12 @@ services:
     - "/data/domains:/data/domains"
     - "/opt/bin/:/opt/bin"
     - "./hooks.json:/hooks.json"
+    networks:
+    - lb_web
+  discovery:
+    image: jwilder/docker-gen
+    volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    - "./templates:/etc/docker-gen/templates"
+    - ".:/hooks"
+    command: "-watch /etc/docker-gen/templates/hooks.json.tmpl /hooks/hooks.json"
