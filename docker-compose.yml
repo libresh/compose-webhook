@@ -1,0 +1,15 @@
+version: '2'
+networks:
+  lb_web:
+    external: true
+services:
+  webhook:
+    image: indiehosters/webhook
+    volumes:
+    - "/var/run/dbus:/var/run/dbus"
+    - "/run/systemd:/run/systemd"
+    - "/etc/systemd/system:/etc/systemd/system"
+    - "/var/run/docker.sock:/var/run/docker.sock"
+    - "/data/domains:/data/domains"
+    - "/opt/bin/:/opt/bin"
+    - "./hooks.json:/hooks.json"
