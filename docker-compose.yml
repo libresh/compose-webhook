@@ -22,5 +22,5 @@ services:
     volumes:
     - "/var/run/docker.sock:/tmp/docker.sock:ro"
     - "./templates:/etc/docker-gen/templates"
-    - "./hooks.json:/hooks.json"
-    command: "-watch /etc/docker-gen/templates/hooks.json.tmpl /hooks.json"
+    - ".:/hooks"
+    command: "-watch /etc/docker-gen/templates/hooks.json.tmpl /hooks/hooks.json"
